@@ -1,0 +1,41 @@
+{% extends 'inventory_tracker/base.html' %}
+
+{% block title %}Transactions{% endblock %}
+
+{% block content %}
+<h2>Transactions</h2><br> 
+  {% if transaction_list %}
+  <ul>
+    <div id="trans-container", name="trans-container", style="width: 100%; overflow: hidden; display: flex;">
+      <!-- <div id="buys", name="buys", style="float: left;"> -->
+      <div id="buys", name="buys", style="width: 600px;">
+        <h4>Purchases</h4>
+        {% for transaction in transaction_list %}
+          {% if transaction.is_purchase %}
+          <li>
+            <a href="/inventory/{{ host.id }}/{{ subhost.id }}/{{ transaction.id }}">
+              {{ transaction.latest_timestamp}} | {{ transaction.item.name }} ({{ transaction.buy_qty}} @ {{ transaction.buy_price }})
+            </a>
+          </li>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <!-- <div id="sells", name="sells", style="margin-left: 600px;"> -->
+      <div id="sells", name="sells", style="flex-grow: 1;">
+        <h4>Sales</h4>
+        {% for transaction in transaction_list %}
+          {% if transaction.is_sale %}
+          <li>
+            <a href="/inventory/{{ host.id }}/{{ subhost.id }}/{{ transaction.id }}">
+              {{ transaction.latest_timestamp }} | {{ transaction.item.name }} ({{ transaction.sell_qty}} @ {{ transaction.sell_price }})
+            </a>
+          </li>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </ul>
+  {% else %}
+  <p>No transactions available.</p>
+  {% endif %}
+{% endblock %}

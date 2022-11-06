@@ -1,0 +1,19 @@
+{% extends 'inventory_tracker/base.html' %}
+
+{% block title %}Item Categories{% endblock %}
+
+{% block content %}
+<div>
+  <h2>{{ category.name }}</h2>
+  {% if item_list %}
+    <h3>Items</h3>
+    <ul>
+      {% for item in item_list %}
+        <li><a href="/inventory/{{ host.id }}/items/{{ category.id }}/{{ item.id }}">{{ item.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No items defined in current category.</p>
+  {% endif %}
+{% endblock %}

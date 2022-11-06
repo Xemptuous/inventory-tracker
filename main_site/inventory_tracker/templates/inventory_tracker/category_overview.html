@@ -1,0 +1,27 @@
+{% extends 'inventory_tracker/base.html' %}
+
+{% block title %}Item Categories{% endblock %}
+
+{% block content %}
+  {% if item_categories %}
+  <h1>Item Categories</h1>
+  <ul>
+    {% for category in item_categories %}
+    <li><a href="/inventory/{{ category.host.id }}/{{ category.subhost.id }}/{{ category.id }}">{{ category.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if structure_categories %}
+  <h1>Item Categories</h1>
+  <ul>
+    {% for category in item_categories %}
+    <li><a href="/inventory/{{ category.host.id }}/{{ category.subhost.id }}/{{ category.id }}">{{ category.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if not structure_categories and not item_categories %}
+  <p>No categories available.</p>
+  {% endif %}
+{% endblock %}

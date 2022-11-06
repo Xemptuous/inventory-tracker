@@ -1,0 +1,88 @@
+{% extends 'inventory_tracker/base.html' %}
+
+{% block title %}Detail{% endblock %}
+
+{% block content %}
+<style>
+th, td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  text-align: center;
+}
+td.head {
+  text-align: right;
+}
+td.body {
+  text-align: left;
+}
+div {
+  overflow: auto;
+}
+</style>
+<div id="header-table", name="header-table">
+  <table border="1", align="left";>
+    <tr>
+        <th><b>SubHost:</b></th>
+        <th><b>Item Category:</b></th>
+        <th><b>Structure Category:</b></th>
+    </tr>
+    <tr>
+      <td>{{ transaction.subhost }}</td>
+      <td>{{ transaction.item_category }}</td>
+      <td>{{ transaction.structure_category }}</td>
+    </tr>
+  </table>
+</div>
+<p><b>Item:</b> {{ transaction.item }}</p> 
+<div id="transaction-info" name="transaction-info">
+  {% if transaction.is_purchase %}
+  <div id="buy-info" name="buy-info" style="float: left;">
+    <table border="1", align="left";>
+      <tr>
+        <td class="head"><b>Buy Qty:</b></td>
+        <td class="body"> {{ transaction.buy_qty }}</td>
+      </tr>
+      <tr>
+        <td class="head"><b>Buy Price:</b></td>
+        <td class="body"> {{ transaction.buy_price }}</td>
+      </tr>
+      <tr>
+        <td class="head"><b>Buy Location:</b></td>
+        <td class="body"> {{ transaction.buy_loc }}</td>
+      </tr>
+      <tr>
+        <td class="head"><b>Buy Timestamp:</b></td>
+        <td class="body"> {{ transaction.buy_ts }}</td>
+      </tr>
+    </table>
+  </div>
+  {% endif %}
+  {% if transaction.is_sale %}
+  <div id="sell-info" name="sell-info">
+    <table border="1", align="left">
+      <tr>
+        <td class="head"><b>Sell Qty:</td>
+        <td class="body"> {{ transaction.sell_qty }}</td>
+      </tr>
+      <tr>
+        <td class="head"><b>Sell Price:</td>
+        <td class="body"> {{ transaction.sell_price }}</td>
+      </tr>
+      <tr>
+        <td class="head"><b>Sell Location:</td>
+        <td class="body"> {{ transaction.sell_loc }}</td>
+      </tr>
+      <tr>
+        <td class="head"><b>Sell Timestamp:</td>
+        <td class="body"> {{ transaction.sell_ts }}</td
+    </table>
+  </div>
+  {% endif %}
+</div>
+<!-- <div id="notes" name="notes"> -->
+<!--   <p><b>Notes:</b> {{ transaction.notes }}</p> -->
+<!-- </div> -->
+
+{% endblock %}

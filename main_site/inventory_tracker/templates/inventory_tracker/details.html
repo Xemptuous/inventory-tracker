@@ -1,0 +1,6 @@
+<h1>{{ item.name }}</h1>
+<ul>
+{% for item in category.item_set.all %}
+    <li>{{ item.name }}</li>
+{% endfor %}
+</ul>

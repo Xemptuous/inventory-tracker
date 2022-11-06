@@ -1,0 +1,28 @@
+{% extends 'inventory_tracker/base.html' %}
+
+{% block title %}Hosts{% endblock %}
+
+{% block content %}
+<div id="hosts", name="hosts", style="float: left">
+  <h2>List of Hosts / Games</h2><br> 
+  {% if host_list %}
+    <ul>
+      {% for host in host_list %}
+      <li><a href="/inventory/{{ host.id }}/">{{ host.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hosts available.</p>
+  {% endif %}
+  <br>
+  Add Host / Game:
+  <div id="host-form", name="host-form">
+    <form method="post" action="/inventory/">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit", name="save">Add Host/Game</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

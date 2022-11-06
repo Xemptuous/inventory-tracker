@@ -1,0 +1,51 @@
+{% extends 'inventory_tracker/base.html' %}
+
+{% block title %}SubHosts{% endblock %}
+
+{% block content %}
+<h2>{{ host.name }}</h2>
+<div id="subhosts", name="subhosts", style="float: left">
+  <h3>Sub Hosts</h3><br> 
+  {% if subhost_list %}
+    <ul>
+      {% for subhost in subhost_list %}
+      <li><a href="/inventory/{{ subhost.host.id }}/{{ subhost.id }}">{{ subhost.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No subhosts available.</p>
+  {% endif %}
+  <br>
+  Add SubHost:
+  <div id="subhost-form" name="subhost-form">
+    <form method="post" action="/inventory/{{host.id}}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit", name="save">Add SubHost</button>
+    </form>
+  </div>
+</div>
+<div id="item-categories", name="item-categories", style="overflow: auto">
+  <h3>Item Categories</h3><br> 
+  {% if item_cat_list %}
+    <ul>
+      {% for itemcat in item_cat_list %}
+      <li><a href="/inventory/{{ host.id }}/items/{{ itemcat.id }}">{{ itemcat.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No Item Categories available.</p>
+  {% endif %}
+  <br>
+  Add Item Category:
+  <div id="itemcat-form" name="itemcat-form">
+    <form method="post" action="/inventory/">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit", name="save">Add Item Category</button>
+    </form>
+  </div>
+</div>
+  {% endblock %}
